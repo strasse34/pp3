@@ -16,51 +16,17 @@ SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
 def get_date():
-    """
-    geting date from user according to the correct format.
-    """
-    date = input("Date(dd.mm.yyyy): ")
-    current_year = get_current_year()
-    day = get_day(date)
-    check_format(day, date, current_year)
+    while True:
+        entered_date = input("Date (dd.mm.yyyy): ")
 
-
-def check_format(day, date, current_year):
-    """
-    check format of provided date
-    """
-    try:
-        if date[5] != '.':
-            print("Invalid date format! Please provide date according to the format (dd.mm.yyyy)!")
-            get_date()
-        elif int(date[6:10]) < int(current_year):
-            print(f"Invalid date format! Year must be equal or greather than {current_year}.")
-            get_date()
-        else:
-            print(f"You selected this date: {day}, {date}")
-    except ValueError:
-        print("Invalid date format! Please Try again!")
-        get_date()
-   
-
-
-def get_current_year():
-    """
-    getting current year to check not belong to the past
-    """
-    current_year = datetime.date.today().year
-    return current_year
-
-def get_day(date):
-    """
-    getting day according to the user date entery
-    """
-    try:
-        day = datetime.datetime.strptime(date, "%d.%m.%Y").strftime("%A")
-        return day
-    except ValueError:
-        print('Invalid date format! Please Try again!')
-        get_date()
+        try:
+            date_validation = datetime.datetime.strptime(entered_date, "%d.%m.%Y")
+            selected_date = date_validation.strftime("%d.%m.%Y")
+            day_of_week = date_validation.strftime("%A")
+            print(f"\nYou seleceted this date: {day_of_week}, {selected_date}\n")
+            break
+        except ValueError:
+            print("\nInvalid date format! Please provide the date in the format dd.mm.yyyy.\n")
     
 
 
