@@ -93,7 +93,7 @@ get_time()
 #     print("New event successfully saved!\n")
 
 
-# def collect_event_date():
+# def collect_event_data():
 #     event = confirmed_date
 #     event.append(confirmed_time)
 #     event.append(confirmed_title)
@@ -104,5 +104,5 @@ get_time()
 # confirmed_date = get_date()
 # confirmed_time = get_time()
 # confirmed_title = get_title()
-# event = collect_event_date()
+# event = collect_event_data()
 # update_worksheet(event)
