@@ -33,6 +33,21 @@ def get_date():
             print("\nInvalid date format! Please provide the date in the format dd.mm.yyyy!\n")
             return False
     
+    final_date = [selected_date, day_of_week]
+    return final_date
 
 
-get_date()
+
+def update_worksheet(date):
+    """
+    Updating the user worksheet in google sheet with new to do list.
+    """
+    print("Saving date ...\n")
+    user_worksheet = SHEET.worksheet("josef_123")
+    user_worksheet.append_row(date)
+    print("Date successfully saved!\n")
+
+
+
+date = get_date()
+update_worksheet(date)
