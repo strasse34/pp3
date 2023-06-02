@@ -16,6 +16,10 @@ SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
 def get_date():
+    """
+    This function get date from user according to provided format using try-except.
+    In case of value error, loop repeat untile getting required date format.
+    """
     while True:
         entered_date = input("Date (dd.mm.yyyy): ")
 
@@ -24,9 +28,10 @@ def get_date():
             selected_date = date_validation.strftime("%d.%m.%Y")
             day_of_week = date_validation.strftime("%A")
             print(f"\nYou seleceted this date: {day_of_week}, {selected_date}\n")
-            break
+            break        
         except ValueError:
-            print("\nInvalid date format! Please provide the date in the format dd.mm.yyyy.\n")
+            print("\nInvalid date format! Please provide the date in the format dd.mm.yyyy!\n")
+            return False
     
 
 
