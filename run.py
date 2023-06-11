@@ -15,6 +15,25 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
+class User:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def display_user_info(self):
+        print(f'Username: {username}')
+        print(f'Password: {password}')
+
+
+def create_account():
+    username = input('Please enter a username: ')
+    password = input('Please enter pssword: ')
+    new_user = User(username, password)
+    current_sheet = SHEET.worksheet('template')
+    new_sheet = current_sheet.duplicate()
+    new_sheet.update_title(new_user.username)
+
+
 def get_date():
     """
     This function get Date from user according to provided format using try-except.
@@ -153,6 +172,6 @@ def update_worksheet(event_data):
     if new_event == "":
         get_date()
 
-
-event_data = []
-get_date()
+create_account()
+# event_data = []
+# get_date()
