@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import datetime
 import sys
+import time
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -15,23 +16,27 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
-class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
-    def display_user_info(self):
-        print(f'Username: {username}')
-        print(f'Password: {password}')
-
-
 def create_account():
+    first_name = input('Please enter your first name: ')
+    last_name = input('Please enter your last name: ')
+    global username
     username = input('Please enter a username: ')
     password = input('Please enter pssword: ')
-    new_user = User(username, password)
     current_sheet = SHEET.worksheet('template')
-    new_sheet = current_sheet.duplicate()
-    new_sheet.update_title(new_user.username)
+    duplicated_sheet = current_sheet.duplicate()
+    duplicated_sheet.update_title(username)
+    new_sheet = SHEET.worksheet(username)
+    new_sheet.update_cell(1, 2, first_name)
+    new_sheet.update_cell(2, 2, last_name)
+    new_sheet.update_cell(3, 2, username)
+    new_sheet.update_cell(4, 2, password)
+
+    print(f'\nCongratulations {first_name}! Your account has been set up.')
+    time.sleep(2)
+    print('\nFor adding new event to your "to do list", we need to take 5 steps.')
+    get_date()
+    time.sleep(2)
+
 
 
 def get_date():
@@ -165,13 +170,15 @@ def update_worksheet(event_data):
     Updating the user worksheet in google sheet with new to do list.
     """
     print("\nSaving date ...\n")
-    user_worksheet = SHEET.worksheet("josef_123")
+    time.sleep(3)
+    user_worksheet = SHEET.worksheet(username)
     user_worksheet.append_row(event_data)
     print("New event successfully saved!\n")
     new_event = input('\nIf you want to add an other event please Enter!')
     if new_event == "":
         get_date()
 
+
+event_data = []
 create_account()
-# event_data = []
-# get_date()
+
