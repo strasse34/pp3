@@ -21,7 +21,7 @@ def get_date():
     In case of value error, loop repeat untile getting required date format.
     """
     while True:
-        entered_date = input("Step 1: setting date\nPlease set a date (dd.mm.yyyy): ")
+        entered_date = input("\nStep 1: setting date\nPlease set a date (dd.mm.yyyy): ")
 
         try:
             date_validation = datetime.datetime.strptime(entered_date, "%d.%m.%Y")
@@ -69,10 +69,14 @@ def get_title():
     print(f'You provided this title "{entered_title}".\n')
     answer = input('Are you sure? (y/n):')
     if answer.lower() == 'y':
-        print('Step 4: adding note')
+        print('\nStep 4: adding note')
         get_note()
-    else:
+    elif answer.lower() == 'n':
         get_title()
+    else:
+        print('Please use "y" for yes and "n" for no')
+        get_title()
+        
 
 
 def get_note():
@@ -80,41 +84,61 @@ def get_note():
     Getting Note for the tiltle that user has already selected.
     """
     entered_note = input("Please add a short note to the title!(Max 150 chrachters) \n")[:150]
-    print(f'You provided this note "{entered_note}".\n')
+    print(f'You provided this note \n"{entered_note}"\n')
     answer = input('Are you sure? (y/n):')
     if answer.lower() == 'y':
-        print('Step 5: saving data')
-        confirmation = input("Do you want to save all your data?(y/n)")
-        if confirmation.lower() == 'y':
-            update_worksheet(event)
-        else:
-            print("executing edit_data function")
-    else:
+        print('\nStep 5: saving data')
+        save_date()
+    elif answer.lower() == 'n':
         get_note()
-    
+    else:
+        print('Please use "y" for yes and "n" for no')
+        get_note()
+
 
 def get_date_confirmation():
     """
     Getting confrimation of user about entered date
     """
-    confirmation = input("Do you confirm it? (y/n): \n")
+    confirmation = input("Do you confirm it? (y/n): ")
     if confirmation.lower() == 'y':
         print('Step 2: setting time')
         get_time()
-    else:
+    elif confirmation.lower() == 'n':
         get_date()
+    else:
+        print('Please use "y" for yes and "n" for no')
+        get_date_confirmation()
 
 
 def get_time_confirmation():
     """
     Getting confrimation of user about entered time
     """
-    confirmation = input("Do you confirm it? (y/n): \n")
+    confirmation = input("Do you confirm it? (y/n): y")
     if confirmation.lower() == 'y':
-        print('Step 3: selecting a title')
+        print('\nStep 3: selecting a title')
         get_title()
-    else:
+    elif confirmation.lower() == 'n':
         get_time()
+    else:
+        print('Please use "y" for yes and "n" for no')
+        get_date_confirmation()
+        
+
+def save_date():
+    confirmation = input("Please select one of the followings!\ny = Yes\ne = Edit\nex = Exit\n")
+    if confirmation.lower() == 'y':
+        print('update_worksheet(event)')
+    elif confirmation.lower() == 'e':
+        print('edit_date()')
+    elif confirmation.lower() == 'ex':
+        print('Have a nice day and goodbye!')
+        return
+    else:
+        print('please use a correct value!')
+        save_date()
+    
 
 
 def update_worksheet(event):
