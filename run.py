@@ -134,8 +134,9 @@ def save_date():
     Getting user confirmation for saving data or leading user to exit or edit date.
     """
     confirmation = input("Please select one of the followings! (s = Save date / e = Exit)")
-    if confirmation.lower() == 'y':
-        update_worksheet(event)
+    if confirmation.lower() == 's':
+        event_data = collect_event_data()
+        update_worksheet(event_data)
     elif confirmation.lower() == 'e':
         print('\nHave a nice day and goodbye!')
         new_event = input("if you want to add a new event please hit Enter key!")
@@ -146,32 +147,32 @@ def save_date():
         save_date()
 
 
-def update_worksheet(event):
-    """
-    Updating the user worksheet in google sheet with new to do list.
-    """
-    print("Saving date ...\n")
-    user_worksheet = SHEET.worksheet("josef_123")
-    user_worksheet.append_row(event)
-    print("New event successfully saved!\n")
-
 
 def collect_event_data():
     """
     Collecting all the confirmed data in a list for adding to the google sheet.
     """
-    event = confirmed_date
-    event.append(confirmed_time)
-    event.append(confirmed_title)
-    event.append(confirmed_note)
+    confirmed_date = get_date()
+    confirmed_time = get_time()
+    confirmed_title = get_title()
+    confirmed_note = get_note()
+    event = confirmed_date + [confirmed_time, confirmed_title, confirmed_note]
     print(event)
     return event
 
 
+def update_worksheet():
+    """
+    Updating the user worksheet in google sheet with new to do list.
+    """
+    event_data = collect_event_data()
+    print("Saving date ...\n")
+    user_worksheet = SHEET.worksheet("josef_123")
+    user_worksheet.append_row(event_data)
+    print("New event successfully saved!\n")
 
-confirmed_date = get_date()
-confirmed_time = get_time()
-confirmed_title = get_title()
-confirmed_note = get_note()
-event = collect_event_data()
-update_worksheet(event)
+
+
+
+get_date()
+
