@@ -15,7 +15,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
-user_pass = {}
+
 
 def user_login():
     """
@@ -23,6 +23,7 @@ def user_login():
     It get username and password of users and check in user_pass dict.
     If usename and password exist in dict, user allowed to start program.
     """
+    global user_pass
     print('Welcome to "My To Do List"!')
     answer = input('Are you new user? (y/n) ')
     if answer.lower() == 'y':
@@ -30,10 +31,10 @@ def user_login():
         create_account()
     elif answer.lower() == 'n':
         print('\n')
+        print(user_pass)
         login_success = False
         while not login_success:
             username = input('\nUsername: ')
-            global user_pass
             if username in user_pass:
                 while True:
                     password = input('Password:')
@@ -56,9 +57,10 @@ def create_account():
     add new worksheet in google sheet with provided username,
     and save all of information to his/her own worksheet. 
     """
+    global username
+    global user_pass
     first_name = input('Please enter your first name: ')
     last_name = input('Please enter your last name: ')
-    global username
     username = input('Please enter a username: ')
     password = input('Please enter pssword: ')
     current_sheet = SHEET.worksheet('template')
@@ -69,7 +71,7 @@ def create_account():
     new_sheet.update_cell(2, 2, last_name)
     new_sheet.update_cell(3, 2, username)
     new_sheet.update_cell(4, 2, password)
-    global user_pass
+    
     user_pass[username] = password
     print(user_pass)
     print(f'\nCongratulations {first_name}! Your account has been set up.')
@@ -219,7 +221,7 @@ def update_worksheet(event_data):
     if new_event == "":
         get_date()
 
-
+user_pass = {}
 event_data = []
 user_login()
 create_account()
