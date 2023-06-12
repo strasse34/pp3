@@ -16,25 +16,24 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
-
-def user_login():
+def user_login(user_pass):
     """
     This function does login process of users.
     It get username and password of users and check in user_pass dict.
     If usename and password exist in dict, user allowed to start program.
     """
-    global user_pass
     print('Welcome to "My To Do List"!')
-    answer = input('Are you new user? (y/n) ')
-    if answer.lower() == 'y':
+    answer = input('Do you have account? (y/n) ')
+    if answer.lower() == 'n':
         print('\n')
-        create_account()
-    elif answer.lower() == 'n':
+        print('\nPlease open an account!')
+        create_account(user_pass)
+    elif answer.lower() == 'y':
         print('\n')
         print(user_pass)
         login_success = False
         while not login_success:
-            username = input('\nUsername: ')
+            username = input('Username: ')
             if username in user_pass:
                 while True:
                     password = input('Password:')
@@ -51,18 +50,27 @@ def user_login():
         print('Please type correct value!')
 
 
-def create_account():
+def create_account(user_pass):
     """
     This function get user information,
     add new worksheet in google sheet with provided username,
     and save all of information to his/her own worksheet. 
     """
     global username
-    global user_pass
     first_name = input('Please enter your first name: ')
     last_name = input('Please enter your last name: ')
-    username = input('Please enter a username: ')
-    password = input('Please enter pssword: ')
+    
+    while True:
+        username = input('Please enter a username: ')
+        if username not in user_pass:
+            password = input('Please enter pssword: ')
+            break
+        else:
+            print('The username is already selected. Please try another one!')
+    
+    user_pass.[username] = password
+    print(user_pass)
+
     current_sheet = SHEET.worksheet('template')
     duplicated_sheet = current_sheet.duplicate()
     duplicated_sheet.update_title(username)
@@ -72,8 +80,6 @@ def create_account():
     new_sheet.update_cell(3, 2, username)
     new_sheet.update_cell(4, 2, password)
     
-    user_pass[username] = password
-    print(user_pass)
     print(f'\nCongratulations {first_name}! Your account has been set up.')
     time.sleep(2)
     print('\nFor adding new event to your "to do list", we need to take 5 steps.')
@@ -221,8 +227,10 @@ def update_worksheet(event_data):
     if new_event == "":
         get_date()
 
+
+
 user_pass = {}
 event_data = []
-user_login()
-create_account()
+user_login(user_pass)
+
 
