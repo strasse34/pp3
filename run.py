@@ -15,8 +15,47 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
+user_pass = {}
+
+def user_login():
+    """
+    This function does login process of users.
+    It get username and password of users and check in user_pass dict.
+    If usename and password exist in dict, user allowed to start program.
+    """
+    print('Welcome to "My To Do List"!')
+    answer = input('Are you new user? (y/n) ')
+    if answer.lower() == 'y':
+        print('\n')
+        create_account()
+    elif answer.lower() == 'n':
+        print('\n')
+        login_success = False
+        while not login_success:
+            username = input('\nUsername: ')
+            global user_pass
+            if username in user_pass:
+                while True:
+                    password = input('Password:')
+                    if user_pass[username] == password:
+                        login_success = True
+                        break
+                    else:
+                        print('Password is wrong! Please try again!')
+            else:
+                print('Username is wrong! Please try again!')
+        if login_success:
+            print('get_date()')
+    else:
+        print('Please type correct value!')
+
 
 def create_account():
+    """
+    This function get user information,
+    add new worksheet in google sheet with provided username,
+    and save all of information to his/her own worksheet. 
+    """
     first_name = input('Please enter your first name: ')
     last_name = input('Please enter your last name: ')
     global username
@@ -30,7 +69,9 @@ def create_account():
     new_sheet.update_cell(2, 2, last_name)
     new_sheet.update_cell(3, 2, username)
     new_sheet.update_cell(4, 2, password)
-
+    global user_pass
+    user_pass[username] = password
+    print(user_pass)
     print(f'\nCongratulations {first_name}! Your account has been set up.')
     time.sleep(2)
     print('\nFor adding new event to your "to do list", we need to take 5 steps.')
@@ -39,7 +80,7 @@ def create_account():
 
 
 
-def get_date():
+# def get_date():
     """
     This function get Date from user according to provided format using try-except.
     In case of value error, loop repeat untile getting required date format.
@@ -180,5 +221,6 @@ def update_worksheet(event_data):
 
 
 event_data = []
+user_login()
 create_account()
 
