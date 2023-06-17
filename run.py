@@ -32,6 +32,7 @@ def user_login():
         print('\n')
         login_success = False
         while not login_success:
+            global username
             username = input('Username: ')
             cred_sheet = SHEET.worksheet('cred')
             data = cred_sheet.get_all_values()
@@ -39,7 +40,7 @@ def user_login():
             if username in usernames:
                 correct_password = False
                 while not correct_password:
-                    password = input('Password:')
+                    password = input('Password: ')
                     index = usernames.index(username)
                     if password == data[index][1]:
                         login_success = True
@@ -125,7 +126,7 @@ def get_date():
         elif confirmation.lower() == 'n':
             get_date()
         else:
-            print('\nPlease use "y" for Yes and "n" for No!')
+            print('\nIncorrect Value!\nPlease use "y" for Yes and "n" for No!')
     
 
 def get_time():
@@ -155,7 +156,7 @@ def get_time():
             print('\nStep 2: setting time')
             get_time()
         else:
-            print('\nPlease use "y" for Yes and "n" for No!')
+            print('\nIncorrect Value!\nPlease use "y" for Yes and "n" for No!')
     
 
 
@@ -163,19 +164,21 @@ def get_title():
     """
     Getting Title for the event that user want to add to the list
     """
+    
     entered_title = input("Please give your event a title!(Max 20 chrachters): ")[:20]
-    answer = input(f'\nYou provided this title "{entered_title}". Sure? (y/n) ')
-    if answer.lower() == 'y':
-        event_data.append(entered_title)
-        print(event_data)
-        print('\nStep 4: adding note')
-        get_note()
-    elif answer.lower(event_data) == 'n':
-        print('\nStep 3: selecting a title')
-        get_title()
-    else:
-        print('Please use "y" for yes and "n" for no!')
-        get_title()
+    while True:
+        answer = input(f'\nYou provided this title "{entered_title}". Sure? (y/n) ')
+        if answer.lower() == 'y':
+            event_data.append(entered_title)
+            print('\nStep 4: adding note')
+            get_note()
+        elif answer.lower() == 'n':
+            print('\nStep 3: selecting a title')
+            get_title()
+        else:
+            print('\nIncorrect Value!\nPlease use "y" for yes and "n" for no!')
+        
+            
     
 
 
@@ -184,18 +187,20 @@ def get_note():
     Getting Note for the tiltle that user has already selected.
     """
     entered_note = input("Please add a short note to the title!(Max 150 chrachters): \n")[:150]
-    answer = input(f'\nYou provided below note: \n\n"{entered_note}"\n\nSure? (y/n) ')
-    if answer.lower() == 'y':
-        event_data.append(entered_note)
-        print(event_data)
-        print('\nStep 5: saving data')
-        save_date()
-    elif answer.lower() == 'n':
-        print('\nStep 4: adding note')
-        get_note()
-    else:
-        print('\nPlease use "y" for yes and "n" for no!')
-        get_note()
+    while True:
+        answer = input(f'\nYou provided below note: \n\n"{entered_note}"\n\nSure? (y/n) ')
+        if answer.lower() == 'y':
+            event_data.append(entered_note)
+            print('\nStep 5: saving data')
+            save_date()
+        elif answer.lower() == 'n':
+            print('\nStep 4: adding note')
+            get_note()
+        else:
+            print('\nIncorrect Value!\nPlease use "y" for yes and "n" for no!')
+      
+            
+                
    
 
 
@@ -209,17 +214,21 @@ def save_date():
     title = event_data[3]
     note = event_data[4]
     print(f'\nYou provided below information for your event:\nDate: {date}\nDay: {day}\nTime: {time}\nTitle: {title}\nNote: {note}')
-    confirmation = input("\nPlease select one of the followings! (s = Save event / n = new event / e = Exit)")
-    if confirmation.lower() == 's':
-        update_worksheet(event_data)
-    elif confirmation.lower() == 'n':
-        get_date()
-    elif confirmation.lower() == 'e':
-        print('\nHave a nice day and goodbye!')
-        return
-    else:
-        print('Please use a correct value!')
-        save_date()
+    while True:
+        confirmation = input("\nPlease select one of the followings!\ns = Save and exit\na = Save and add another event\ne = Exit without save\n")
+        if confirmation.lower() == 's':
+            update_worksheet(event_data)
+            print('\nHave a nice day and goodbye!')
+            exit()
+        elif confirmation.lower() == 'a':
+            update_worksheet(event_data)
+            get_date()
+        elif confirmation.lower() == 'e':
+            print('\nHave a nice day and goodbye!')
+            exit()
+        else:
+            print('\nIncorrect Value! Please use a correct value!')
+            
 
 
 
@@ -231,13 +240,7 @@ def update_worksheet(event_data):
     time.sleep(3)
     user_worksheet = SHEET.worksheet(username)
     user_worksheet.append_row(event_data)
-    print("New event successfully saved!\n")
-    new_event = input('\nIf you want to add an other event please Enter!')
-    if new_event == "":
-        get_date()
-    else:
-        return
-
+    print("The event was successfully saved!\n")
 
 
 
