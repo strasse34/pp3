@@ -16,7 +16,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
-def user_login(user_pass):
+def user_login():
     """
     This function does login process of users.
     It get username and password of users and check in user_pass dict.
@@ -27,17 +27,21 @@ def user_login(user_pass):
     if answer.lower() == 'n':
         print('\n')
         print('\nPlease open an account!')
-        create_account(user_pass)
+        create_account()
     elif answer.lower() == 'y':
         print('\n')
-        print(user_pass)
         login_success = False
         while not login_success:
             username = input('Username: ')
-            if username in user_pass:
-                while True:
+            cred_sheet = SHEET.worksheet('cred')
+            data = cred_sheet.get_all_values()
+            usernames = [row[0] for row in data]
+            if username in usernames:
+                correct_password = False
+                while not correct_password:
                     password = input('Password:')
-                    if user_pass[username] == password:
+                    index = usernames.index(username)
+                    if password == data[index][1]:
                         login_success = True
                         break
                     else:
@@ -45,31 +49,36 @@ def user_login(user_pass):
             else:
                 print('Username is wrong! Please try again!')
         if login_success:
-            print('get_date()')
+            get_date()
     else:
         print('Please type correct value!')
 
 
-def create_account(user_pass):
+def create_account():
     """
     This function get user information,
     add new worksheet in google sheet with provided username,
     and save all of information to his/her own worksheet. 
     """
-    global username
     first_name = input('Please enter your first name: ')
     last_name = input('Please enter your last name: ')
     
     while True:
+        global username
         username = input('Please enter a username: ')
-        if username not in user_pass:
+        cred_sheet = SHEET.worksheet('cred')
+        data = cred_sheet.get_all_values()
+        usernames = [row[0] for row in data]
+        if username not in usernames:
             password = input('Please enter pssword: ')
             break
         else:
             print('The username is already selected. Please try another one!')
     
-    user_pass.[username] = password
+    cred_sheet = SHEET.worksheet('cred')
+    user_pass = [username, password]
     print(user_pass)
+    cred_sheet.append_row(user_pass)
 
     current_sheet = SHEET.worksheet('template')
     duplicated_sheet = current_sheet.duplicate()
@@ -88,7 +97,7 @@ def create_account(user_pass):
 
 
 
-# def get_date():
+def get_date():
     """
     This function get Date from user according to provided format using try-except.
     In case of value error, loop repeat untile getting required date format.
@@ -200,14 +209,14 @@ def save_date():
     title = event_data[3]
     note = event_data[4]
     print(f'\nYou provided below information for your event:\nDate: {date}\nDay: {day}\nTime: {time}\nTitle: {title}\nNote: {note}')
-    confirmation = input("\nPlease select one of the followings! (s = Save event / e = Exit)")
+    confirmation = input("\nPlease select one of the followings! (s = Save event / n = new event / e = Exit)")
     if confirmation.lower() == 's':
         update_worksheet(event_data)
+    elif confirmation.lower() == 'n':
+        get_date()
     elif confirmation.lower() == 'e':
         print('\nHave a nice day and goodbye!')
-        new_event = input("if you want to add a new event please hit Enter key!")
-        if new_event == "":
-            get_date()
+        return
     else:
         print('Please use a correct value!')
         save_date()
@@ -218,7 +227,7 @@ def update_worksheet(event_data):
     """
     Updating the user worksheet in google sheet with new to do list.
     """
-    print("\nSaving date ...\n")
+    print("\nSaving date ... Please wait ...\n")
     time.sleep(3)
     user_worksheet = SHEET.worksheet(username)
     user_worksheet.append_row(event_data)
@@ -226,11 +235,11 @@ def update_worksheet(event_data):
     new_event = input('\nIf you want to add an other event please Enter!')
     if new_event == "":
         get_date()
+    else:
+        return
 
 
 
-user_pass = {}
+
 event_data = []
-user_login(user_pass)
-
-
+user_login()
