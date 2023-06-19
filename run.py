@@ -16,6 +16,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
+
 def user_login():
     """
     This function does login process of users.
@@ -50,9 +51,51 @@ def user_login():
             else:
                 print('Username is wrong! Please try again!')
         if login_success:
+            print('\nYou have successfully loged in.')
+            show_event_list()
             get_date()
     else:
         print('Please type correct value!')
+
+
+
+def show_event_list():
+    """
+    This function provides users with the all the events which starts from current date after login.
+    The function, get all the dates and compare with the current date.
+    Then lists those which is in current date or after it.  
+    """
+    date_sheet = SHEET.worksheet(username)
+    all_date = date_sheet.get_all_values()
+    dates = [row[0] for row in all_date]
+    current_date = datetime.date.today()
+    matched_dates = []
+
+    for date in dates:
+        row_date = datetime.datetime.strptime(date, '%d.%m.%Y').date()
+        if row_date >= current_date:
+            matched_dates.append(date)
+        else:
+            print('You have no event.')
+
+    if matched_dates:
+        print('Your event list is as follows:')
+        for date in matched_dates:
+            print(date)
+    else:
+        print('You have no upcoming events.')
+
+    while True:
+        answer = input('\nWhat do you want to do? (n = Add new event / e = Exit) ')
+        if answer.lower() == 'n':
+            get_date()
+        elif answer.lower() == 'e':
+            print('\nGoodbye!')
+            exit()
+        else:
+            print('\nIncorrect Value!\nPlease use "n" or "e"!')
+
+
 
 
 def create_account():
@@ -61,8 +104,8 @@ def create_account():
     add new worksheet in google sheet with provided username,
     and save all of information to his/her own worksheet. 
     """
-    first_name = input('Please enter your first name: ')
-    last_name = input('Please enter your last name: ')
+    first_name = input('Please enter your first name: ').capitalize()
+    last_name = input('Please enter your last name: ').capitalize()
     
     while True:
         global username
@@ -77,19 +120,14 @@ def create_account():
             print('The username is already selected. Please try another one!')
     
     cred_sheet = SHEET.worksheet('cred')
-    user_pass = [username, password]
+    user_pass = [username, password, first_name, last_name]
     print(user_pass)
     cred_sheet.append_row(user_pass)
 
     current_sheet = SHEET.worksheet('template')
     duplicated_sheet = current_sheet.duplicate()
     duplicated_sheet.update_title(username)
-    new_sheet = SHEET.worksheet(username)
-    new_sheet.update_cell(1, 2, first_name)
-    new_sheet.update_cell(2, 2, last_name)
-    new_sheet.update_cell(3, 2, username)
-    new_sheet.update_cell(4, 2, password)
-    
+        
     print(f'\nCongratulations {first_name}! Your account has been set up.')
     time.sleep(2)
     print('\nFor adding new event to your "to do list", we need to take 5 steps.')
@@ -222,6 +260,7 @@ def save_date():
             exit()
         elif confirmation.lower() == 'a':
             update_worksheet(event_data)
+            event_data.clear()
             get_date()
         elif confirmation.lower() == 'e':
             print('\nHave a nice day and goodbye!')
