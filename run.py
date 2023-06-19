@@ -68,12 +68,12 @@ def show_event_list():
     date_sheet = SHEET.worksheet(username)
     all_date = date_sheet.get_all_values()
     dates = [row[0] for row in all_date]
-    current_date = datetime.date.today()
+    the_date = datetime.date.today()
+    current_date = the_date.strftime("%d.%m.%Y")
     matched_dates = []
 
     for date in dates:
-        row_date = datetime.datetime.strptime(date, '%d.%m.%Y').date()
-        if row_date >= current_date:
+        if date >= current_date:
             matched_dates.append(date)
         else:
             print('You have no event.')
