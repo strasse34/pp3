@@ -51,7 +51,7 @@ def user_login():
             else:
                 print('Username is wrong! Please try again!')
         if login_success:
-            print('\nYou have successfully loged in.')
+            print('\nYou have successfully loged in.\n')
             show_event_list()
             get_date()
     else:
@@ -66,22 +66,26 @@ def show_event_list():
     Then lists those which is in current date or after it.  
     """
     date_sheet = SHEET.worksheet(username)
-    all_date = date_sheet.get_all_values()
-    dates = [row[0] for row in all_date]
-    the_date = datetime.date.today()
-    current_date = the_date.strftime("%d.%m.%Y")
-    matched_dates = []
+    all_data = date_sheet.get_all_values()
+    headers = all_data[0]  
+    data_rows = all_data[1:]  
+    dates = [row[0] for row in data_rows]
+    current_date = datetime.date.today()
+    matched_data = []
 
-    for date in dates:
-        if date >= current_date:
-            matched_dates.append(date)
-        else:
-            print('You have no event.')
+    for date, row in zip(dates, data_rows):
+        event_date = datetime.datetime.strptime(date, "%d.%m.%Y").date()
+        if event_date >= current_date:
+            matched_data.append(row)
 
-    if matched_dates:
-        print('Your event list is as follows:')
-        for date in matched_dates:
-            print(date)
+    if matched_data:
+        matched_data.sort(key=lambda x: datetime.datetime.strptime(x[0], "%d.%m.%Y"))
+        print("Your event list is as follows:\n")
+        for data in matched_data:
+            print("Date:", data[0])
+            for header, value in zip(headers[1:], data[1:]):
+                print(header + ":", value)
+            print()
     else:
         print('You have no upcoming events.')
 
