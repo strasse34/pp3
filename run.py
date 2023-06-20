@@ -51,15 +51,15 @@ def show_event_list():
 
     while True:
         answer = input(
-            '\nWhat do you want to do? (n = Add new event / e = Exit) '
+            '\nWhat do you want to do? (a = Add new event / e = Exit) '
         )
-        if answer.lower() == 'n':
+        if answer.lower() == 'a':
             get_date()
         elif answer.lower() == 'e':
-            print('\nGoodbye!')
+            print('\nGoodbye!\n')
             exit()
         else:
-            print('\nIncorrect Value!\nPlease use "n" or "e"!')
+            print('\nIncorrect Value! Please use "n" or "e"!')
 
 
 def create_account():
@@ -95,7 +95,7 @@ def create_account():
     print(f'\nCongratulations {first_name}! Your account has been set up.')
     time.sleep(2)
     print(
-        '\nFor adding new event to your "to do list", we need to take 5 steps.'
+        '\nFor adding new event to "My To Do List", we need to take 5 steps.'
     )
     get_date()
     time.sleep(2)
@@ -108,41 +108,43 @@ def user_login():
     If usename and password exist in dict, user allowed to start program.
     """
     print('\nWelcome to "My To Do List"!')
-    answer = input('Do you have account? (y = Yes /n = No) ')
-    if answer.lower() == 'n':
-        print('\n')
-        print('\nPlease open an account!')
-        create_account()
-    elif answer.lower() == 'y':
-        print('\n')
-        login_success = False
-        while not login_success:
-            global username
-            username = input('Username: ')
-            cred_sheet = SHEET.worksheet('cred')
-            data = cred_sheet.get_all_values()
-            usernames = [row[0] for row in data]
-            if username in usernames:
-                correct_password = False
-                while not correct_password:
-                    password = input('Password: ')
-                    index = usernames.index(username)
-                    first_name = data[index][2]
-                    if password == data[index][1]:
-                        login_success = True
-                        break
-                    else:
-                        print('Password is wrong! Please try again!')
-            else:
-                print('Username is wrong! Please try again!')
-        if login_success:
-            print(f'\nHi {first_name}. You have successfully loged in.\n'
-                  'Loading your event(s) ... please wait! ...\n')
-            time.sleep(3)
-            show_event_list()
-            get_date()
-    else:
-        print('Please type correct value!')
+    while True:
+        answer = input('Do you have account? (y = Yes /n = No) ')
+        if answer.lower() == 'n':
+            print("\nOk, let's open an account!")
+            create_account()
+        elif answer.lower() == 'y':
+            print('\n')
+            login_success = False
+            while not login_success:
+                global username
+                username = input('Username: ')
+                cred_sheet = SHEET.worksheet('cred')
+                data = cred_sheet.get_all_values()
+                usernames = [row[0] for row in data]
+                if username in usernames:
+                    correct_password = False
+                    while not correct_password:
+                        password = input("Password: ")
+                        index = usernames.index(username)
+                        first_name = data[index][2]
+                        if password == data[index][1]:
+                            login_success = True
+                            break
+                        else:
+                            print('\nPassword is not matched with username! '
+                                  'Please try again!')
+                else:
+                    print(f"\nWe don't have {username} in our data base! "
+                          "Please try again!")
+            if login_success:
+                print(f'\nHi {first_name}. You have successfully loged in.\n'
+                    'Loading your event(s) ... please wait! ...\n')
+                time.sleep(3)
+                show_event_list()
+                get_date()
+        else:
+            print('\nIncorrect Value! Please enter correct value!\n')
 
 
 def get_date():
@@ -165,8 +167,8 @@ def get_date():
             break
 
         except ValueError:
-            print('\nInvalid date format!'
-                  'Please provide the date in the format dd.mm.yyyy!\n')
+            print('\nInvalid date format! '
+                  'Please provide the date in the format dd.mm.yyyy!')
             continue
     while True:
         confirmation = input("Do you confirm it? (y/n): ")
