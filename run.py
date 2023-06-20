@@ -16,47 +16,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('to_do_list')
 
 
-def user_login():
-    """
-    This function does login process of users.
-    It get username and password of users and check in user_pass dict.
-    If usename and password exist in dict, user allowed to start program.
-    """
-    print('Welcome to "My To Do List"!')
-    answer = input('Do you have account? (y/n) ')
-    if answer.lower() == 'n':
-        print('\n')
-        print('\nPlease open an account!')
-        create_account()
-    elif answer.lower() == 'y':
-        print('\n')
-        login_success = False
-        while not login_success:
-            global username
-            username = input('Username: ')
-            cred_sheet = SHEET.worksheet('cred')
-            data = cred_sheet.get_all_values()
-            usernames = [row[0] for row in data]
-            if username in usernames:
-                correct_password = False
-                while not correct_password:
-                    password = input('Password: ')
-                    index = usernames.index(username)
-                    if password == data[index][1]:
-                        login_success = True
-                        break
-                    else:
-                        print('Password is wrong! Please try again!')
-            else:
-                print('Username is wrong! Please try again!')
-        if login_success:
-            print('\nYou have successfully loged in.\n')
-            show_event_list()
-            get_date()
-    else:
-        print('Please type correct value!')
-
-
 def show_event_list():
     """
     This function provides users with the all the events which starts from
@@ -109,6 +68,7 @@ def create_account():
     add new worksheet in google sheet with provided username,
     and save all of information to his/her own worksheet.
     """
+    global first_name
     first_name = input('Please enter your first name: ').capitalize()
     last_name = input('Please enter your last name: ').capitalize()
 
@@ -140,6 +100,48 @@ def create_account():
     )
     get_date()
     time.sleep(2)
+
+
+def user_login():
+    """
+    This function does login process of users.
+    It get username and password of users and check in user_pass dict.
+    If usename and password exist in dict, user allowed to start program.
+    """
+    print('Welcome to "My To Do List"!')
+    answer = input('Do you have account? (y/n) ')
+    if answer.lower() == 'n':
+        print('\n')
+        print('\nPlease open an account!')
+        create_account()
+    elif answer.lower() == 'y':
+        print('\n')
+        login_success = False
+        while not login_success:
+            global username
+            username = input('Username: ')
+            cred_sheet = SHEET.worksheet('cred')
+            data = cred_sheet.get_all_values()
+            usernames = [row[0] for row in data]
+            if username in usernames:
+                correct_password = False
+                while not correct_password:
+                    password = input('Password: ')
+                    index = usernames.index(username)
+                    first_name = data[index][2]
+                    if password == data[index][1]:
+                        login_success = True
+                        break
+                    else:
+                        print('Password is wrong! Please try again!')
+            else:
+                print('Username is wrong! Please try again!')
+        if login_success:
+            print(f'\nHi {first_name}. You have successfully loged in.\n')
+            show_event_list()
+            get_date()
+    else:
+        print('Please type correct value!')
 
 
 def get_date():
