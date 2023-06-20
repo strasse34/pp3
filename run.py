@@ -86,7 +86,6 @@ def create_account():
 
     cred_sheet = SHEET.worksheet('cred')
     user_pass = [username, password, first_name, last_name]
-    print(user_pass)
     cred_sheet.append_row(user_pass)
 
     current_sheet = SHEET.worksheet('template')
@@ -108,8 +107,8 @@ def user_login():
     It get username and password of users and check in user_pass dict.
     If usename and password exist in dict, user allowed to start program.
     """
-    print('Welcome to "My To Do List"!')
-    answer = input('Do you have account? (y/n) ')
+    print('\nWelcome to "My To Do List"!')
+    answer = input('Do you have account? (y = Yes /n = No) ')
     if answer.lower() == 'n':
         print('\n')
         print('\nPlease open an account!')
@@ -137,7 +136,9 @@ def user_login():
             else:
                 print('Username is wrong! Please try again!')
         if login_success:
-            print(f'\nHi {first_name}. You have successfully loged in.\n')
+            print(f'\nHi {first_name}. You have successfully loged in.\n'
+                  'Loading your event(s) ... please wait! ...\n')
+            time.sleep(3)
             show_event_list()
             get_date()
     else:
@@ -202,7 +203,6 @@ def get_time():
         confirmation = input("Do you confirm it? (y/n): ")
         if confirmation.lower() == 'y':
             event_data.append(entered_time)
-            print(event_data)
             print('\nStep 3: selecting a title')
             get_title()
         elif confirmation.lower() == 'n':
@@ -242,7 +242,7 @@ def get_note():
                          "(Max 150 chrachters): \n")[:150]
     while True:
         answer = input(f'\nYou provided below note: '
-                       '\n\n"{entered_note}"\n\nSure? (y/n) ')
+                       f'\n\n"{entered_note}"\n\nSure? (y/n) ')
         if answer.lower() == 'y':
             event_data.append(entered_note)
             print('\nStep 5: saving data')
@@ -260,22 +260,22 @@ def save_date():
     leading user to exit or edit date.
     """
     print(f'\nYou provided below information for your event:'
-          '\nDate: {event_data[0]}\nDay: {event_data[1]}\nTime: '
-          '{event_data[2]}\nTitle: '
-          '{event_data[3]}\nNote: {event_data[4]}')
+          f'\nDate: {event_data[0]}\nDay: {event_data[1]}\nTime: '
+          f'{event_data[2]}\nTitle: '
+          f'{event_data[3]}\nNote: {event_data[4]}')
     while True:
         confirmation = input("\nPlease select one of the followings!"
-                             "\ns = Save and exit\na = Save and add another "
-                             "event\ne = Exit without save\n")
-        if confirmation.lower() == 's':
+                             "\n1 = Save and exit\n2 = Save and add another "
+                             "event\n3 = Exit without save\n")
+        if confirmation.lower() == '1':
             update_worksheet(event_data)
             print('\nHave a nice day and goodbye!')
             exit()
-        elif confirmation.lower() == 'a':
+        elif confirmation.lower() == '2':
             update_worksheet(event_data)
             event_data.clear()
             get_date()
-        elif confirmation.lower() == 'e':
+        elif confirmation.lower() == '3':
             print('\nHave a nice day and goodbye!')
             exit()
         else:
@@ -291,6 +291,7 @@ def update_worksheet(event_data):
     user_worksheet = SHEET.worksheet(username)
     user_worksheet.append_row(event_data)
     print("The event was successfully saved!\n")
+    time.sleep(1)
 
 
 event_data = []
