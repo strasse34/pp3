@@ -62,7 +62,7 @@ def show_event_list():
     This function provides users with the all the events which starts from
     current date after login.
     The function, get all the dates and compare with the current date.
-    Then lists those which is in current date or after it.  
+    Then lists those which is in current date or after it.
     """
     date_sheet = SHEET.worksheet(username)
     all_data = date_sheet.get_all_values()
@@ -107,11 +107,11 @@ def create_account():
     """
     This function get user information,
     add new worksheet in google sheet with provided username,
-    and save all of information to his/her own worksheet. 
+    and save all of information to his/her own worksheet.
     """
     first_name = input('Please enter your first name: ').capitalize()
     last_name = input('Please enter your last name: ').capitalize()
-    
+
     while True:
         global username
         username = input('Please enter a username: ')
@@ -123,7 +123,7 @@ def create_account():
             break
         else:
             print('The username is already selected. Please try another one!')
-    
+
     cred_sheet = SHEET.worksheet('cred')
     user_pass = [username, password, first_name, last_name]
     print(user_pass)
@@ -132,7 +132,7 @@ def create_account():
     current_sheet = SHEET.worksheet('template')
     duplicated_sheet = current_sheet.duplicate()
     duplicated_sheet.update_title(username)
-        
+
     print(f'\nCongratulations {first_name}! Your account has been set up.')
     time.sleep(2)
     print(
@@ -177,7 +177,7 @@ def get_date():
             get_date()
         else:
             print('\nIncorrect Value!\nPlease use "y" for Yes and "n" for No!')
-    
+
 
 def get_time():
     """
@@ -230,7 +230,7 @@ def get_title():
             get_title()
         else:
             print('\nIncorrect Value!\nPlease use "y" for yes and "n" for no!')
- 
+
 
 def get_note():
     """
@@ -250,21 +250,17 @@ def get_note():
             get_note()
         else:
             print('\nIncorrect Value!\nPlease use "y" for yes and "n" for no!')
-  
+
 
 def save_date():
     """
-    Getting user confirmation for saving data or 
+    Getting user confirmation for saving data or
     leading user to exit or edit date.
     """
-    date = event_data[0]
-    day = event_data[1]
-    time = event_data[2]
-    title = event_data[3]
-    note = event_data[4]
     print(f'\nYou provided below information for your event:'
-          '\nDate: {date}\nDay: {day}\nTime: {time}\nTitle: '
-          '{title}\nNote: {note}')
+          '\nDate: {event_data[0]}\nDay: {event_data[1]}\nTime: '
+          '{event_data[2]}\nTitle: '
+          '{event_data[3]}\nNote: {event_data[4]}')
     while True:
         confirmation = input("\nPlease select one of the followings!"
                              "\ns = Save and exit\na = Save and add another "
@@ -282,7 +278,7 @@ def save_date():
             exit()
         else:
             print('\nIncorrect Value! Please use a correct value!')
-       
+
 
 def update_worksheet(event_data):
     """
