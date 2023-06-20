@@ -139,7 +139,7 @@ def user_login():
                           "Please try again!")
             if login_success:
                 print(f'\nHi {first_name}. You have successfully loged in.\n'
-                    'Loading your event(s) ... please wait! ...\n')
+                      'Loading your event(s) ... please wait! ...\n')
                 time.sleep(3)
                 show_event_list()
                 get_date()
@@ -168,20 +168,19 @@ def get_date():
 
         except ValueError:
             print('\nInvalid date format! '
-                  'Please provide the date in the format dd.mm.yyyy!')
+                  'Please provide the date in dd.mm.yyyy format!')
             continue
     while True:
         confirmation = input("Do you confirm it? (y/n): ")
         if confirmation.lower() == 'y':
             event_data.append(entered_date)
             event_data.append(day_of_week)
-            print(event_data)
             print('\nStep 2: setting time')
             get_time()
         elif confirmation.lower() == 'n':
             get_date()
         else:
-            print('\nIncorrect Value!\nPlease use "y" for Yes and "n" for No!')
+            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
 
 
 def get_time():
@@ -199,7 +198,7 @@ def get_time():
 
         except ValueError:
             print("\nInvalid time format! "
-                  "Please provide the time in the format hh:mm !\n")
+                  "Please provide the time in hh:mm format!\n")
             continue
     while True:
         confirmation = input("Do you confirm it? (y/n): ")
@@ -211,7 +210,7 @@ def get_time():
             print('\nStep 2: setting time')
             get_time()
         else:
-            print('\nIncorrect Value!\nPlease use "y" for Yes and "n" for No!')
+            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
 
 
 def get_title():
@@ -223,7 +222,7 @@ def get_title():
     )[:20]
     while True:
         answer = input(
-            f'\nYou provided this title "{entered_title}". Sure? (y/n) '
+            f'\nYou provided this title "{entered_title}". Are you sure? (y/n) '
         )
         if answer.lower() == 'y':
             event_data.append(entered_title)
@@ -233,7 +232,7 @@ def get_title():
             print('\nStep 3: selecting a title')
             get_title()
         else:
-            print('\nIncorrect Value!\nPlease use "y" for yes and "n" for no!')
+            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
 
 
 def get_note():
@@ -244,7 +243,7 @@ def get_note():
                          "(Max 150 chrachters): \n")[:150]
     while True:
         answer = input(f'\nYou provided below note: '
-                       f'\n\n"{entered_note}"\n\nSure? (y/n) ')
+                       f'\n\n"{entered_note}"\n\nAre you sure? (y/n) ')
         if answer.lower() == 'y':
             event_data.append(entered_note)
             print('\nStep 5: saving data')
@@ -253,7 +252,7 @@ def get_note():
             print('\nStep 4: adding note')
             get_note()
         else:
-            print('\nIncorrect Value!\nPlease use "y" for yes and "n" for no!')
+            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
 
 
 def save_date():
