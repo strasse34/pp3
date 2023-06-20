@@ -68,21 +68,41 @@ def create_account():
     add new worksheet in google sheet with provided username,
     and save all of information to his/her own worksheet.
     """
-    global first_name
-    first_name = input('Please enter your first name: ').capitalize()
-    last_name = input('Please enter your last name: ').capitalize()
+    while True:
+        first_name = input('Please enter your first name: ').capitalize()
+        if first_name.strip():
+            break
+        else:
+            print("\nFirst name cannot be empty. Please try again.")
+    while True:
+        last_name = input('Please enter your last name: ').capitalize()
+        if last_name.strip():
+            break
+        else:
+            print("\nLast name cannot be empty. Please try again.")
 
     while True:
         global username
-        username = input('Please enter a username: ')
+        while True:
+            username = input('Please enter a username: ')
+            if username.strip():
+                break
+            else:
+                print("\nUsername cannot be empty. Please try again.")
         cred_sheet = SHEET.worksheet('cred')
         data = cred_sheet.get_all_values()
         usernames = [row[0] for row in data]
         if username not in usernames:
-            password = input('Please enter pssword: ')
+            while True:
+                password = input('Please enter pssword: ')
+                if password.strip():
+                    break
+                else:
+                    print("\nPassword cannot be empty. Please try again.")
             break
         else:
-            print('The username is already selected. Please try another one!')
+            print('\nThe username is already selected. '
+                  'Please try another one!')
 
     cred_sheet = SHEET.worksheet('cred')
     user_pass = [username, password, first_name, last_name]
@@ -109,7 +129,7 @@ def user_login():
     """
     print('\nWelcome to "My To Do List"!')
     while True:
-        answer = input('Do you have account? (y = Yes /n = No) ')
+        answer = input('Do you have account? (y = Yes / n = No + Enter!)')
         if answer.lower() == 'n':
             print("\nOk, let's open an account!")
             create_account()
@@ -135,7 +155,7 @@ def user_login():
                             print('\nPassword is not matched with username! '
                                   'Please try again!')
                 else:
-                    print(f"\nWe don't have {username} in our data base! "
+                    print(f'\nWe do not have "{username}" in our data base! '
                           "Please try again!")
             if login_success:
                 print(f'\nHi {first_name}. You have successfully loged in.\n'
@@ -180,7 +200,8 @@ def get_date():
         elif confirmation.lower() == 'n':
             get_date()
         else:
-            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
+            print('\nIncorrect Value! '
+                  'Please use "y" for Yes and "n" for No!\n')
 
 
 def get_time():
@@ -210,7 +231,8 @@ def get_time():
             print('\nStep 2: setting time')
             get_time()
         else:
-            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
+            print('\nIncorrect Value! '
+                  'Please use "y" for Yes and "n" for No!\n')
 
 
 def get_title():
@@ -222,7 +244,8 @@ def get_title():
     )[:20]
     while True:
         answer = input(
-            f'\nYou provided this title "{entered_title}". Are you sure? (y/n) '
+            f'\nYou provided this title "{entered_title}". '
+            'Are you sure? (y/n) '
         )
         if answer.lower() == 'y':
             event_data.append(entered_title)
@@ -232,7 +255,8 @@ def get_title():
             print('\nStep 3: selecting a title')
             get_title()
         else:
-            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
+            print('\nIncorrect Value! '
+                  'Please use "y" for Yes and "n" for No!\n')
 
 
 def get_note():
@@ -252,7 +276,8 @@ def get_note():
             print('\nStep 4: adding note')
             get_note()
         else:
-            print('\nIncorrect Value!Please use "y" for Yes and "n" for No!\n')
+            print('\nIncorrect Value! '
+                  'Please use "y" for Yes and "n" for No!\n')
 
 
 def save_date():
