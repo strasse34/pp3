@@ -78,7 +78,9 @@ steps for deployment:<br>
 - Set the buildbacks to Python and NodeJS in that order
 - Like the Heroku app to the repository
 - Click on Deploy
-
+## Credit
+- Code Institute for deployment terminal
+- Internet free content for learning python
 
 
  
