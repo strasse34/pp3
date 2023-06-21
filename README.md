@@ -46,6 +46,16 @@ Each event in the to-do list consists of the following properties:<br>
 The project integrates with Google Sheets to store and manage the to-do list data. It uses the 'gspread library' and 'Google OAuth 2.0' authentication to access the Google Sheets API.
 ### Credentials
 To access the Google Sheets API, the project requires valid credentials stored in a 'creds.json' file. The credentials should be obtained from the Google Cloud Console and granted appropriate permissions for accessing and modifying the target Google Sheets document.
+## Testing
+I have manualy tested this project as followings:<br>
+- I passed through PEP8 Python Validator and confirmed that there are no errors.
+- I gave correct and incorrect inputs to all the features manually in my lockal and Heroku terminal and got expected behavior from app.
+## Bugs
+### Solved Bugs
+During developing this app, I fount some bugs and fixed them. But the last one and the most important one was this bug: users could sign up to a new accout with just empty input for first name, last name, username and password. I just added an if-else using strip() method to mentioned inputs and fixed the bugs.<br>
+### Remaining Bugs
+There are no remaining bugs.
+
 
 
  
