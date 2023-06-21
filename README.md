@@ -46,6 +46,18 @@ Each event in the to-do list consists of the following properties:<br>
 The project integrates with Google Sheets to store and manage the to-do list data. It uses the 'gspread library' and 'Google OAuth 2.0' authentication to access the Google Sheets API.
 ### Credentials
 To access the Google Sheets API, the project requires valid credentials stored in a 'creds.json' file. The credentials should be obtained from the Google Cloud Console and granted appropriate permissions for accessing and modifying the target Google Sheets document.
+## Dependencies and Libraries
+This project relies on several dependencies and libraries to implement its functionality. These dependencies enable integration with Google Sheets, handling date and time, and performing other necessary operations. Here are the key dependencies and libraries used in this project:<br>
+### gspread
+'gspread' is a Python library that provides an easy-to-use interface for accessing Google Sheets. It allows the project to read, write, and manipulate data in Google Sheets.<br>
+### google-auth and google-auth-oauthlib
+The 'google-auth' and 'google-auth-oauthlib' libraries provide authentication and authorization functionality for interacting with Google APIs. In this project, they are specifically used for Google Sheets integration, enabling secure access to the Google Sheets API.<br>
+### datetime
+The 'datetime' module is a built-in Python module that provides classes for manipulating dates and times. It is used in this project to handle date and time-related operations, such as comparing dates and formatting them according to the required format.<br>
+### sys
+The 'sys' module is a built-in Python module that provides access to system-specific parameters and functions. It is used in this project to handle system-related operations, although its usage details are not explicitly mentioned in the provided code snippet.
+### time
+The 'time' module is a built-in Python module that provides various time-related functions. It is used in this project to introduce delays or pauses between certain operations, providing a smoother user experience.
 ## Testing
 I have manualy tested this project as followings:<br>
 - I passed through PEP8 Python Validator and confirmed that there are no errors.
@@ -55,6 +67,17 @@ I have manualy tested this project as followings:<br>
 During developing this app, I fount some bugs and fixed them. But the last one and the most important one was this bug: users could sign up to a new accout with just empty input for first name, last name, username and password. I just added an if-else using strip() method to mentioned inputs and fixed the bugs.<br>
 ### Remaining Bugs
 There are no remaining bugs.
+## Validator Testing
+### PEP8
+No error were returned from PEP8online.com
+## Deployment
+This project was deployed using Code Institute's mock terminal for Heroku.<br>
+steps for deployment:<br>
+- Fork or clone this repository
+- Create a new Heroku app
+- Set the buildbacks to Python and NodeJS in that order
+- Like the Heroku app to the repository
+- Click on Deploy
 
 
 
