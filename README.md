@@ -1,3 +1,13 @@
+# My To Do List
+It is a python command-line interface app which runs in Code Institute mock terminal in Heroku. Users can keep their tasks with date, time, title and a short note through this app.<br>
+The data is stored in a google sheet which has already been integrated with the app. 
+
+
+
+
+
+
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
