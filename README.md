@@ -1,6 +1,10 @@
 # My To Do List
-It is a python command-line interface app which runs in Code Institute mock terminal in Heroku. Users can keep their tasks with date, time, title and a short note through this app.<br>
-The data is stored in a google sheet which has already been integrated with the app. 
+It is a python command-line interface app which runs in Code Institute mock terminal in Heroku. Users can keep their tasks with date, time, title and a short note through this app. The data is stored in a google sheet which has already been integrated with the app.<br>
+[Here is live version of my project](link)
+![App in different screens](pic link)
+#How does it work?
+It is supper easy. App gets required information step by step. It instructs and helps users to add their information easily. If you are new user, you open an account and then start adding event/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and possword and then see what are upcomming events/tasks. Then you can exit or add a new task.
+ 
 
 
 
