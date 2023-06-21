@@ -282,7 +282,7 @@ def get_note():
         if answer.lower() == 'y':
             event_data.append(entered_note)
             print('\nStep 5: saving data')
-            save_date()
+            save_data()
         elif answer.lower() == 'n':
             print('\nStep 4: adding note')
             get_note()
@@ -291,7 +291,7 @@ def get_note():
                   'Please use "y" for Yes and "n" for No!\n')
 
 
-def save_date():
+def save_data():
     """
     Getting user confirmation for saving data or
     leading user to exit or edit date.
