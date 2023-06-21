@@ -12,7 +12,7 @@ Those users who use the app for the first time, will be directed to this feature
 ### Log in feature
 If user has already an account, he/she just need to enter username and password, and log in to the account and starts adding new event/tasks. App checks username and password in data base, and when everything is fine, takes user to his/her account.<br>
 ![Log in function](screen shot link)
-## Show Event List teature 
+### Show Event List teature 
 This feature checks all the enteries of a user and if user has an event/task in current date or in future date, list all of them after log in.<br>
 ![Show Event List function](screen shot link) 
 ### Get Date feature
@@ -33,6 +33,20 @@ When user provide with all required data, this feature once gathered all of them
 ### Update Worksheet feature
 If user select to save data, this feature uploads all data to google sheet in user's worksheet and make user sure that all data has been saved successfully.<br>
 ![Save Data function](screen shot link)
+## Data Model
+The data model in this project represents the structure and organization of the to-do list events. The data is stored and managed using Google Sheets.<br>
+### Event Data Structure
+Each event in the to-do list consists of the following properties:<br>
+- Date: The date of the event in the format dd.mm.yyyy.
+- Day of Week: The day of the week corresponding to the event date.
+- Time: The time of the event in the format hh:mm.
+- Title: The title or description of the event, limited to a maximum of 20 characters.
+- Note: A short note or additional information about the event, limited to a maximum of 150 characters.
+### Google Sheets Integration
+The project integrates with Google Sheets to store and manage the to-do list data. It uses the 'gspread library' and 'Google OAuth 2.0' authentication to access the Google Sheets API.
+### Credentials
+To access the Google Sheets API, the project requires valid credentials stored in a 'creds.json' file. The credentials should be obtained from the Google Cloud Console and granted appropriate permissions for accessing and modifying the target Google Sheets document.
+
 
  
 
