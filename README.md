@@ -1,36 +1,36 @@
-# My To Do List
+## My To Do List
 It is a python command-line interface app which runs in Code Institute mock terminal in Heroku. Users can keep their tasks with date, time, title and a short note through this app. The data is stored in a google sheet which has already been integrated with the app.<br>
 [Here is live version of my project](link)<br>
 ![App in different screens](pic link)
-#How does it work?
+## How does it work?
 It is supper easy. App gets required information step by step. It instructs and helps users to add their information easily. If you are new user, you open an account and then start adding event/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and possword and then see what are upcomming events/tasks. Then you can exit or add a new task.
-# Reatures
+## Features
 There are 8 features in this app. Each feature communicates with user and instruct user to do the right job. In some of features, user must provide information in a special format. Otherwise user receives error message and is redirected to previous feature. After providing correct information, app gets final confirmation from user and then take user to the next feature. I will explain each features below:
-## Create Account feature
+### Create Account feature
 Those users who use the app for the first time, will be directed to this feature to open an account. They are asked to enter first and last name and set a username and password. The feature first check for the same username in data base, if could find anything, then user will be signed up and start adding first event/task.<br>
 ![Create Account function](screen shot link)
-## Log in feature
+### Log in feature
 If user has already an account, he/she just need to enter username and password, and log in to the account and starts adding new event/tasks. App checks username and password in data base, and when everything is fine, takes user to his/her account.<br>
 ![Log in function](screen shot link)
 ## Show Event List teature 
 This feature checks all the enteries of a user and if user has an event/task in current date or in future date, list all of them after log in.<br>
 ![Show Event List function](screen shot link) 
-## Get Date feature
+### Get Date feature
 This feature get date when task should be done. User should enter date according to proper date format which is dd.mm.yyyy, otherwise receives an error message.<br>
 ![Get Date function](screen shot link)
-## Get Time feature 
+### Get Time feature 
 This feature get time when task should be done. User should enter time according to proper time format which is hh:mm, otherwise receives an error message.<br>
 ![Get Time function](screen shot link)
-## Get Title feature
+### Get Title feature
 User give a title for the event/task. But the title length should not be more than 20 charactors.<br>
 ![Get Title function](screen shot link)
-## Get Note feature
+### Get Note feature
 User write a short explanation about the event/task using 150 charactors.<br>
 ![Get Note function](screen shot link) 
-## Save Data feature 
+### Save Data feature 
 When user provide with all required data, this feature once gathered all of them in one place and get the final user's confirmation. User has 3 options, save and exit, save and add another event, and exit without save.<br>
 ![Save Data function](screen shot link)
-## Update Worksheet feature
+### Update Worksheet feature
 If user select to save data, this feature uploads all data to google sheet in user's worksheet and make user sure that all data has been saved successfully.<br>
 ![Save Data function](screen shot link)
 
