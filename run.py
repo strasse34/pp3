@@ -127,9 +127,20 @@ def user_login():
     It get username and password of users and check in user_pass dict.
     If usename and password exist in dict, user allowed to start program.
     """
-    print('\nWelcome to "My To Do List"!')
+    print('\nWelcome to "My To Do List"!'
+          '\n'
+          '\nWhat is "My To Do List"?'
+          '\nWith this small app, you can save your future tasks or events.'
+          '\nYou provide date, time, title and a short note '
+          'for each event/task.'
+          '\nYou make an account and all data will be saved in your account.'
+          '\nApp will provide you with the list of your upcomming '
+          '\nevents/tasks while log in.'
+          '\n'
+          '\nHow to use?'
+          '\nJust follow the inner app instructions and heat Enter key!')
     while True:
-        answer = input('Do you have account? (y = Yes / n = No + Enter!)')
+        answer = input('\nDo you have account? (y = Yes / n = No + Enter!)')
         if answer.lower() == 'n':
             print("\nOk, let's open an account!")
             create_account()
