@@ -1,37 +1,37 @@
 ## My To Do List
-It is a python command-line interface app which runs in Code Institute mock terminal in Heroku. Users can keep their tasks with date, time, title and a short note through this app. The data is stored in a google sheet which has already been integrated with the app.<br>
+It is a Python command-line interface app that runs in Code Institute mock terminal in Heroku. Aff users can keep their tasks with date, time, title and a short note through this app. The data is stored in a Google sheet which has already been integrated with the app.<br>
 [Here is live version of my project](link)<br>
 ![App in different screens](pic link)
 ## How does it work?
-It is supper easy. App gets required information step by step. It instructs and helps users to add their information easily. If you are new user, you open an account and then start adding event/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and possword and then see what are upcomming events/tasks. Then you can exit or add a new task.
+It is super easy. The app gets the required information step by step. It instructs and helps the users to add their information easily. If you are a new user, you open an account and then start adding events/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and password and then see what are upcoming events/tasks. Then you can exit or add a new task.
 ## Features
-There are 8 features in this app. Each feature communicates with user and instruct user to do the right job. In some of features, user must provide information in a special format. Otherwise user receives error message and is redirected to previous feature. After providing correct information, app gets final confirmation from user and then take user to the next feature. I will explain each features below:
+There are 8 features in this app. Each feature communicates with the user and instructs the user to do the right job. In some of the features, the user must provide information in a special format. Otherwise, the user receives an error message and is redirected to the previous feature. After providing correct information, the app gets final confirmation from the user and then takes the user to the next feature. I will explain each feature below:
 ### Create Account feature
-Those users who use the app for the first time, will be directed to this feature to open an account. They are asked to enter first and last name and set a username and password. The feature first check for the same username in data base, if could find anything, then user will be signed up and start adding first event/task.<br>
+Those users who use the app for the first time will be directed to this feature to open an account. They are asked to enter their first and last names and set a username and password. The feature first check for the same username in database, if could not find anything, then the user will be signed up and start adding the first event/task.<br>
 ![Create Account function](screen shot link)
 ### Log in feature
-If user has already an account, he/she just need to enter username and password, and log in to the account and starts adding new event/tasks. App checks username and password in data base, and when everything is fine, takes user to his/her account.<br>
+If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
 ![Log in function](screen shot link)
 ### Show Event List teature 
-This feature checks all the enteries of a user and if user has an event/task in current date or in future date, list all of them after log in.<br>
+This feature checks all the entries of the user and if the user has an event/task on the current date or in a future date, lists all of them after logging in.<br>
 ![Show Event List function](screen shot link) 
 ### Get Date feature
-This feature get date when task should be done. User should enter date according to proper date format which is dd.mm.yyyy, otherwise receives an error message.<br>
+This feature gets the date when the event/task should be done. the user should enter the date according to the proper date format which is dd.mm.yyyy. Otherwise, the user receives an error message.<br>
 ![Get Date function](screen shot link)
 ### Get Time feature 
-This feature get time when task should be done. User should enter time according to proper time format which is hh:mm, otherwise receives an error message.<br>
+This feature gets the time when task should be done. the user should enter the time according to the proper time format which is hh:mm. Otherwise, the user receives an error message.<br>
 ![Get Time function](screen shot link)
 ### Get Title feature
-User give a title for the event/task. But the title length should not be more than 20 charactors.<br>
+The user gives a title for the event/task. But the title length should not be more than 20 characters.<br>
 ![Get Title function](screen shot link)
 ### Get Note feature
-User write a short explanation about the event/task using 150 charactors.<br>
+The sser writes a short explanation about the event/task using 150 characters.<br>
 ![Get Note function](screen shot link) 
 ### Save Data feature 
-When user provide with all required data, this feature once gathered all of them in one place and get the final user's confirmation. User has 3 options, save and exit, save and add another event, and exit without save.<br>
+When the user provides all the required data, this feature once gathered all of them in one place and gets the final user's confirmation. The user has 3 options, save and exit, save and add another event, and exit without saving.<br>
 ![Save Data function](screen shot link)
 ### Update Worksheet feature
-If user select to save data, this feature uploads all data to google sheet in user's worksheet and make user sure that all data has been saved successfully.<br>
+If the user selects to save data, this feature uploads all data to Google sheet in user's worksheet and makes the user sure that all data has been saved successfully.<br>
 ![Save Data function](screen shot link)
 ## Data Model
 The data model in this project represents the structure and organization of the to-do list events. The data is stored and managed using Google Sheets.<br>
@@ -59,12 +59,12 @@ The 'sys' module is a built-in Python module that provides access to system-spec
 ### time
 The 'time' module is a built-in Python module that provides various time-related functions. It is used in this project to introduce delays or pauses between certain operations, providing a smoother user experience.
 ## Testing
-I have manualy tested this project as followings:<br>
+I have manually tested this project as followings:<br>
 - I passed through PEP8 Python Validator and confirmed that there are no errors.
-- I gave correct and incorrect inputs to all the features manually in my lockal and Heroku terminal and got expected behavior from app.
+- I gave correct and incorrect inputs to all the features manually in my lockal and Heroku terminal and got the expected behavior from the app.
 ## Bugs
 ### Solved Bugs
-During developing this app, I fount some bugs and fixed them. But the last one and the most important one was this bug: users could sign up to a new accout with just empty input for first name, last name, username and password. I just added an if-else using strip() method to mentioned inputs and fixed the bugs.<br>
+During developing this app, I found some bugs and fixed them. But the last one and the most important one was this bug: users could sign up for a new account with just empty input for first name, last name, username, and password. I just added an if-else using strip() method to mentioned inputs and fixed the bugs.<br>
 ### Remaining Bugs
 There are no remaining bugs.
 ## Validator Testing
@@ -75,9 +75,9 @@ This project was deployed using Code Institute's mock terminal for Heroku.<br>
 steps for deployment:<br>
 - Fork or clone this repository
 - Create a new Heroku app
-- Set the buildbacks to Python and NodeJS in that order
+- Set the build backs to Python and NodeJS in that order
 - Like the Heroku app to the repository
 - Click on Deploy
 ## Credit
 - Code Institute for deployment terminal
-- Internet free content for learning python
+- Internet free content for learning Python

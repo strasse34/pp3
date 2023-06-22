@@ -304,7 +304,7 @@ def save_data():
     while True:
         confirmation = input("\nPlease select one of the followings!"
                              "\n1 = Save and exit\n2 = Save and add another "
-                             "event\n3 = Exit without save\n")
+                             "event\n3 = Exit without saving\n")
         if confirmation.lower() == '1':
             update_worksheet(event_data)
             print('\nHave a nice day and goodbye!')
