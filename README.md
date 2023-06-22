@@ -11,10 +11,10 @@ Those users who use the app for the first time will be directed to this feature 
 ![Create Account function](https://github.com/strasse34/pp3/blob/main/screenshots/create-account.png)
 ### Log in feature
 If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
-![Log in function](https://github.com/strasse34/pp3/blob/main/screenshots/user-login.png)
+![Log in function](https://github.com/strasse34/pp3/blob/main/screenshots/user-loggingin.png)
 ### Show Event List teature 
 This feature checks all the entries of the user and if the user has an event/task on the current date or in a future date, lists all of them after logging in.<br>
-![Show Event List function](https://github.com/strasse34/pp3/blob/main/screenshots/user-login.png) 
+![Show Event List function](https://github.com/strasse34/pp3/blob/main/screenshots/show-event-list.png) 
 ### Get Date feature
 This feature gets the date when the event/task should be done. the user should enter the date according to the proper date format which is dd.mm.yyyy. Otherwise, the user receives an error message.<br>
 ![Get Date function](https://github.com/strasse34/pp3/blob/main/screenshots/get-date.png)
