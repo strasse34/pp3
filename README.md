@@ -8,31 +8,31 @@ It is super easy. The app gets the required information step by step. It instruc
 There are 8 features in this app. Each feature communicates with the user and instructs the user to do the right job. In some of the features, the user must provide information in a special format. Otherwise, the user receives an error message and is redirected to the previous feature. After providing correct information, the app gets final confirmation from the user and then takes the user to the next feature. I will explain each feature below:
 ### Create Account feature
 Those users who use the app for the first time will be directed to this feature to open an account. They are asked to enter their first and last names and set a username and password. The feature first check for the same username in database, if could not find anything, then the user will be signed up and start adding the first event/task.<br>
-![Create Account function](screen shot link)
+![Create Account function](https://github.com/strasse34/pp3/blob/main/screenshots/create-account.png)
 ### Log in feature
 If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
-![Log in function](screen shot link)
+![Log in function](https://github.com/strasse34/pp3/blob/main/screenshots/user-login.png)
 ### Show Event List teature 
 This feature checks all the entries of the user and if the user has an event/task on the current date or in a future date, lists all of them after logging in.<br>
-![Show Event List function](screen shot link) 
+![Show Event List function](https://github.com/strasse34/pp3/blob/main/screenshots/user-login.png) 
 ### Get Date feature
 This feature gets the date when the event/task should be done. the user should enter the date according to the proper date format which is dd.mm.yyyy. Otherwise, the user receives an error message.<br>
-![Get Date function](screen shot link)
+![Get Date function](https://github.com/strasse34/pp3/blob/main/screenshots/get-date.png)
 ### Get Time feature 
 This feature gets the time when task should be done. the user should enter the time according to the proper time format which is hh:mm. Otherwise, the user receives an error message.<br>
-![Get Time function](screen shot link)
+![Get Time function](https://github.com/strasse34/pp3/blob/main/screenshots/get-time.png)
 ### Get Title feature
 The user gives a title for the event/task. But the title length should not be more than 20 characters.<br>
-![Get Title function](screen shot link)
+![Get Title function](https://github.com/strasse34/pp3/blob/main/screenshots/get-title.png)
 ### Get Note feature
 The sser writes a short explanation about the event/task using 150 characters.<br>
-![Get Note function](screen shot link) 
+![Get Note function](https://github.com/strasse34/pp3/blob/main/screenshots/get-note.png) 
 ### Save Data feature 
 When the user provides all the required data, this feature once gathered all of them in one place and gets the final user's confirmation. The user has 3 options, save and exit, save and add another event, and exit without saving.<br>
-![Save Data function](screen shot link)
+![Save Data function](https://github.com/strasse34/pp3/blob/main/screenshots/save-data.png)
 ### Update Worksheet feature
 If the user selects to save data, this feature uploads all data to Google sheet in user's worksheet and makes the user sure that all data has been saved successfully.<br>
-![Save Data function](screen shot link)
+![Save Data function](https://github.com/strasse34/pp3/blob/main/screenshots/update-worksheet.png)
 ## Data Model
 The data model in this project represents the structure and organization of the to-do list events. The data is stored and managed using Google Sheets.<br>
 ### Event Data Structure
