@@ -1,6 +1,6 @@
 ## My To Do List
 It is a Python command-line interface app that runs in Code Institute mock terminal in Heroku. Aff users can keep their tasks with date, time, title and a short note through this app. The data is stored in a Google sheet which has already been integrated with the app.<br>
-[Here is live version of my project](link)<br>
+[Here is live version of my project](https://ci-to-do-list-7e3f284eb751.herokuapp.com//)<br>
 ![App in different screens](pic link)
 ## How does it work?
 It is super easy. The app gets the required information step by step. It instructs and helps the users to add their information easily. If you are a new user, you open an account and then start adding events/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and password and then see what are upcoming events/tasks. Then you can exit or add a new task.
@@ -76,7 +76,7 @@ steps for deployment:<br>
 - Fork or clone this repository
 - Create a new Heroku app
 - Set the build backs to Python and NodeJS in that order
-- Like the Heroku app to the repository
+- Link the Heroku app to the repository
 - Click on Deploy
 ## Credit
 - Code Institute for deployment terminal
