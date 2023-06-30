@@ -171,7 +171,8 @@ def create_account():
                     print("\nPassword cannot be empty. Please try again.")
                 elif not re.match(r"^(?=.*\d)(?=.*[a-z])(?=."
                                   r"*[A-Z])(?=.*[\W_]).{8,}$", password):
-                    print("\nPassword must contain a combination of lowercase"
+                    print("\nPassword must be at least 8 characters and "
+                          "contain a combination of lowercase"
                           " and uppercase letters, special characters, "
                           "and numbers. Please try again.")
                 else:
