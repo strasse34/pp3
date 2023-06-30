@@ -63,13 +63,14 @@ def user_login():
                                   'Please try again!')
                 else:
                     print(f'\nWe do not have "{username}" in our data base! '
-                          "Please try again!")
+                          "Please check username and try again!")
             if login_success:
                 print(f'\nHi {first_name}. You have successfully loged in.\n'
                       'Loading your event(s) ... please wait! ...\n')
                 time.sleep(3)
                 show_event_list()
-                get_date()
+                time.sleep(4)
+                               
         else:
             print('\nIncorrect Value! Please enter correct value!\n')
 
@@ -109,15 +110,20 @@ def show_event_list():
 
     while True:
         answer = input(
-            '\nWhat do you want to do? (a = Add new event / e = Exit) '
+            '\nWhat do you want to do? (a = Add new event / e = Exit /'
+            ' d = Delet account) '
         )
         if answer.lower() == 'a':
             get_date()
         elif answer.lower() == 'e':
             print('\nGoodbye!\n')
             exit()
+        elif answer.lower() == 'd':
+            print('Deleting account .... Please wait ....')
+            time.sleep(3)
+            delete_account(username)
         else:
-            print('\nIncorrect Value! Please use "n" or "e"!')
+            print('\nIncorrect Value! Please use "n" or "e" or "d"!')
 
 
 def create_account():
@@ -190,6 +196,26 @@ def create_account():
     time.sleep(2)
 
 
+def delete_account(username):
+    """
+    This function allows the users to delete their account,
+    including their information from the 'cred' worksheet,
+    and their event data worksheet.
+    """
+    cred_sheet = SHEET.worksheet('cred')
+    data = cred_sheet.get_all_values()
+    usernames = [row[0] for row in data]
+    if username in usernames:
+        row_index = usernames.index(username) + 1
+        cred_sheet.delete_rows(row_index)
+        event_sheet = SHEET.worksheet(username)
+        SHEET.del_worksheet(event_sheet)
+        print(f"\nYour account '{username}' has been successfully deleted.")
+    else:
+        print("\nAccount not found. Please check your username and try again.")
+    exit()
+
+
 def get_date():
     """
     This function gets a date from the user according to
@@ -204,8 +230,6 @@ def get_date():
             date_validation = datetime.datetime.strptime(
                 entered_date, "%d.%m.%Y"
             )
-
-            # Check if the entered date is a past or current date
             if date_validation.date() <= datetime.datetime.now().date():
                 print("\nInvalid date! Please provide a future date.")
                 continue
