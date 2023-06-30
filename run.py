@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 import datetime
 import sys
 import time
+import re
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -121,45 +122,58 @@ def show_event_list():
 
 def create_account():
     """
-    This function get user information,
-    add new worksheet in google sheet with provided username,
-    and save all of information to his/her own worksheet.
+    This function gets user information,
+    adds a new worksheet in a Google Sheet with the provided username,
+    and saves all information to their own worksheet.
     """
     while True:
         first_name = input('Please enter your first name: ').capitalize()
-        if first_name.strip():
-            break
-        else:
+        if not first_name.strip():
             print("\nFirst name cannot be empty. Please try again.")
-    while True:
-        last_name = input('Please enter your last name: ').capitalize()
-        if last_name.strip():
-            break
+        elif not first_name.isalpha():
+            print("\nFirst name can only contain letters. Please try again.")
         else:
-            print("\nLast name cannot be empty. Please try again.")
+            break
 
     while True:
-        global username
+        last_name = input('Please enter your last name: ').capitalize()
+        if not last_name.strip():
+            print("\nLast name cannot be empty. Please try again.")
+        elif not last_name.isalpha():
+            print("\nLast name can only contain letters. Please try again.")
+        else:
+            break
+
+    while True:
         while True:
             username = input('Please enter a username: ')
-            if username.strip():
-                break
-            else:
+            if not username.strip():
                 print("\nUsername cannot be empty. Please try again.")
+            elif not re.match(r"^(?=.*[a-zA-Z])[\w!@#$%^&*-]+$", username):
+                print("\nUsername must contain at least one letter and"
+                      " can only contain letters, special characters, "
+                      "or a combination of both. Please try again.")
+            else:
+                break
+
         cred_sheet = SHEET.worksheet('cred')
         data = cred_sheet.get_all_values()
         usernames = [row[0] for row in data]
         if username not in usernames:
             while True:
-                password = input('Please enter pssword: ')
-                if password.strip():
-                    break
-                else:
+                password = input('Please enter a password: ')
+                if not password.strip():
                     print("\nPassword cannot be empty. Please try again.")
+                elif not re.match(r"^(?=.*\d)(?=.*[a-z])(?=."
+                                  r"*[A-Z])(?=.*[\W_]).{8,}$", password):
+                    print("\nPassword must contain a combination of lowercase"
+                          " and uppercase letters, special characters, "
+                          "and numbers. Please try again.")
+                else:
+                    break
             break
         else:
-            print('\nThe username is already selected. '
-                  'Please try another one!')
+            print('\nThe username is already taken. Please try another one!')
 
     cred_sheet = SHEET.worksheet('cred')
     user_pass = [username, password, first_name, last_name]
@@ -169,26 +183,27 @@ def create_account():
     duplicated_sheet = current_sheet.duplicate()
     duplicated_sheet.update_title(username)
 
-    print(f'\nCongratulations {first_name}! Your account has been set up.')
+    print(f'\nCongratulations, {first_name}! Your account has been set up.')
     time.sleep(2)
-    print(
-        '\nFor adding new event to "My To Do List", we need to take 5 steps.'
-    )
+    print('\nTo add a new event to "My To-Do List", we need to take 5 steps.')
     get_date()
     time.sleep(2)
 
 
 def get_date():
     """
-    This function gets a date from the user according to 
+    This function gets a date from the user according to
     the provided format using try-except.
-    In case of a value error, the loop repeats until 
+    In case of a value error, the loop repeats until
     getting the required date format.
     """
     while True:
-        entered_date = input("\nStep 1: setting date\nPlease set a date (dd.mm.yyyy): ")
+        entered_date = input("\nStep 1: setting date\n"
+                             "Please set a date (dd.mm.yyyy): ")
         try:
-            date_validation = datetime.datetime.strptime(entered_date, "%d.%m.%Y")
+            date_validation = datetime.datetime.strptime(
+                entered_date, "%d.%m.%Y"
+            )
 
             # Check if the entered date is a past or current date
             if date_validation.date() <= datetime.datetime.now().date():
@@ -201,7 +216,8 @@ def get_date():
             break
 
         except ValueError:
-            print("\nInvalid date format! Please provide the date in dd.mm.yyyy format!")
+            print("\nInvalid date format! Please provide the date"
+                  " in dd.mm.yyyy format!")
             continue
 
     while True:
@@ -214,7 +230,9 @@ def get_date():
         elif confirmation.lower() == "n":
             get_date()
         else:
-            print('\nIncorrect value! Please use "y" for Yes and "n" for No!\n')
+            print('\nIncorrect value! Please use "y" '
+                  'for Yes and "n" for No!\n')
+
 
 def get_time():
     """
