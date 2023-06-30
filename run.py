@@ -70,7 +70,6 @@ def user_login():
                 time.sleep(3)
                 show_event_list()
                 time.sleep(4)
-                               
         else:
             print('\nIncorrect Value! Please enter correct value!\n')
 

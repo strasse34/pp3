@@ -5,13 +5,16 @@ It is a Python command-line interface app that runs in Code Institute mock termi
 ## How does it work?
 It is super easy. The app gets the required information step by step. It instructs and helps the users to add their information easily. If you are a new user, you open an account and then start adding events/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and password and then see what are upcoming events/tasks. Then you can exit or add a new task.
 ## Features
-There are 8 features in this app. Each feature communicates with the user and instructs the user to do the right job. In some of the features, the user must provide information in a special format. Otherwise, the user receives an error message and is redirected to the previous feature. After providing correct information, the app gets final confirmation from the user and then takes the user to the next feature. I will explain each feature below:
+There are 9 features in this app. Each feature communicates with the user and instructs the user to do the right job. In some of the features, the user must provide information in a special format. Otherwise, the user receives an error message and is redirected to the previous feature. After providing correct information, the app gets final confirmation from the user and then takes the user to the next feature. I will explain each feature below:
 ### Create Account feature
-Those users who use the app for the first time will be directed to this feature to open an account. They are asked to enter their first and last names and set a username and password. The feature first check for the same username in database, if could not find anything, then the user will be signed up and start adding the first event/task.<br>
+Those users who use the app for the first time will be directed to this feature to open an account. They are asked to enter their first and last names and set a username and password. Firstly, the feature check for the same username in database, if could not find anything, then the user will be signed up and start adding the first event/task.<br>
 ![Create Account function](https://github.com/strasse34/pp3/blob/main/screenshots/create-account.png)
 ### Log in feature
 If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
 ![Log in function](https://github.com/strasse34/pp3/blob/main/screenshots/user-loggingin.png)
+### Delet Account feature
+If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
+![Delete Account function]()
 ### Show Event List teature 
 This feature checks all the entries of the user and if the user has an event/task on the current date or in a future date, lists all of them after logging in.<br>
 ![Show Event List function](https://github.com/strasse34/pp3/blob/main/screenshots/show-event-list.png) 
@@ -58,6 +61,8 @@ The 'datetime' module is a built-in Python module that provides classes for mani
 The 'sys' module is a built-in Python module that provides access to system-specific parameters and functions. It is used in this project to handle system-related operations, although its usage details are not explicitly mentioned in the provided code snippet.
 ### time
 The 'time' module is a built-in Python module that provides various time-related functions. It is used in this project to introduce delays or pauses between certain operations, providing a smoother user experience.
+### re
+The 're' module in Python provides support for working with regular expressions. Regular expressions are powerful patterns that allow you to search, extract, and manipulate strings based on specific patterns of characters. With 're', you can perform operations such as searching, replacing, and splitting strings using these patterns. It's a valuable tool for tasks like data validation, text processing, and parsing.
 ## Testing
 I have manually tested this project as followings:<br>
 - I passed through PEP8 Python Validator and confirmed that there are no errors.
