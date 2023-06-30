@@ -14,7 +14,7 @@ If the user has already an account, he/she just need to enter a username and pas
 ![Log in function](https://github.com/strasse34/pp3/blob/main/screenshots/user-loggingin.png)
 ### Delet Account feature
 If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
-![Delete Account function]()
+![Delete Account function](https://github.com/strasse34/pp3/blob/main/screenshots/delete-account.png)
 ### Show Event List teature 
 This feature checks all the entries of the user and if the user has an event/task on the current date or in a future date, lists all of them after logging in.<br>
 ![Show Event List function](https://github.com/strasse34/pp3/blob/main/screenshots/show-event-list.png) 
