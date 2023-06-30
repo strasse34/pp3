@@ -151,6 +151,7 @@ def create_account():
 
     while True:
         while True:
+            global username
             username = input('Please enter a username: ')
             if not username.strip():
                 print("\nUsername cannot be empty. Please try again.")
