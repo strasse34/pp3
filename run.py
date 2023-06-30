@@ -118,7 +118,7 @@ def show_event_list():
             print('\nGoodbye!\n')
             exit()
         elif answer.lower() == 'd':
-            print('Deleting account .... Please wait ....')
+            print('\nDeleting account .... Please wait ....')
             time.sleep(3)
             delete_account(username)
         else:
@@ -209,7 +209,7 @@ def delete_account(username):
         cred_sheet.delete_rows(row_index)
         event_sheet = SHEET.worksheet(username)
         SHEET.del_worksheet(event_sheet)
-        print(f"\nYour account '{username}' has been successfully deleted.")
+        print(f"\nYour account '{username}' has been successfully deleted.\n")
     else:
         print("\nAccount not found. Please check your username and try again.")
     exit()
