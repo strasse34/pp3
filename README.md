@@ -1,7 +1,6 @@
 ## My To Do List
-It is a Python command-line interface app that runs in Code Institute mock terminal in Heroku. Aff users can keep their tasks with date, time, title and a short note through this app. The data is stored in a Google sheet which has already been integrated with the app.<br>
+It is a Python command-line interface app that runs in Code Institute mock terminal in Heroku. The users can keep their tasks with date, time, title and a short note through this app. The data is stored in a Google sheet which has already been integrated with the app.<br>
 [Here is live version of my project](https://ci-to-do-list-7e3f284eb751.herokuapp.com//)<br>
-![App in different screens](pic link)
 ## How does it work?
 It is super easy. The app gets the required information step by step. It instructs and helps the users to add their information easily. If you are a new user, you open an account and then start adding events/tasks. It takes about 1 minute to add one single event and save it. When you come next time, you just need to log in with your username and password and then see what are upcoming events/tasks. Then you can exit or add a new task.
 ## Features
@@ -12,12 +11,12 @@ Those users who use the app for the first time will be directed to this feature 
 ### Log in feature
 If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
 ![Log in function](https://github.com/strasse34/pp3/blob/main/screenshots/user-loggingin.png)
-### Delet Account feature
-If the user has already an account, he/she just need to enter a username and password, log in to the account, and starts adding new event/tasks. App checks username and password in database, and when everything is fine, takes the user to his/her account.<br>
-![Delete Account function](https://github.com/strasse34/pp3/blob/main/screenshots/delete-account.png)
-### Show Event List teature 
+### Show Event List feature 
 This feature checks all the entries of the user and if the user has an event/task on the current date or in a future date, lists all of them after logging in.<br>
 ![Show Event List function](https://github.com/strasse34/pp3/blob/main/screenshots/show-event-list.png) 
+### Delete Account feature
+This feature comes after Show Event List feature and gives the option of account deletion. Users can easily delete their account and associated data. When a user chooses to delete their account, all their information, including username, password, and personal details, is permanently removed from the system. Additionally, the user's individual worksheet, where they store their event data, is also deleted. <br>
+![Delete Account function](https://github.com/strasse34/pp3/blob/main/screenshots/delete-account.png)
 ### Get Date feature
 This feature gets the date when the event/task should be done. the user should enter the date according to the proper date format which is dd.mm.yyyy. Otherwise, the user receives an error message.<br>
 ![Get Date function](https://github.com/strasse34/pp3/blob/main/screenshots/get-date.png)
