@@ -180,40 +180,41 @@ def create_account():
 
 def get_date():
     """
-    This function get Date from user according to provided format using
-    try-except.
-    In case of value error, loop repeat untile getting required date format.
+    This function gets a date from the user according to 
+    the provided format using try-except.
+    In case of a value error, the loop repeats until 
+    getting the required date format.
     """
     while True:
-        entered_date = input(
-            "\nStep 1: setting date\nPlease set a date (dd.mm.yyyy): "
-        )
+        entered_date = input("\nStep 1: setting date\nPlease set a date (dd.mm.yyyy): ")
         try:
-            date_validation = datetime.datetime.strptime(
-                entered_date, "%d.%m.%Y"
-            )
+            date_validation = datetime.datetime.strptime(entered_date, "%d.%m.%Y")
+
+            # Check if the entered date is a past or current date
+            if date_validation.date() <= datetime.datetime.now().date():
+                print("\nInvalid date! Please provide a future date.")
+                continue
+
             selected_date = date_validation.strftime("%d.%m.%Y")
             day_of_week = date_validation.strftime("%A")
-            print(f"\nYou seleceted this date: {day_of_week}, {selected_date}")
+            print(f"\nYou selected this date: {day_of_week}, {selected_date}")
             break
 
         except ValueError:
-            print('\nInvalid date format! '
-                  'Please provide the date in dd.mm.yyyy format!')
+            print("\nInvalid date format! Please provide the date in dd.mm.yyyy format!")
             continue
+
     while True:
         confirmation = input("Do you confirm it? (y/n): ")
-        if confirmation.lower() == 'y':
+        if confirmation.lower() == "y":
             event_data.append(entered_date)
             event_data.append(day_of_week)
-            print('\nStep 2: setting time')
+            print("\nStep 2: setting time")
             get_time()
-        elif confirmation.lower() == 'n':
+        elif confirmation.lower() == "n":
             get_date()
         else:
-            print('\nIncorrect Value! '
-                  'Please use "y" for Yes and "n" for No!\n')
-
+            print('\nIncorrect value! Please use "y" for Yes and "n" for No!\n')
 
 def get_time():
     """
